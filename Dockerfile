@@ -39,7 +39,7 @@ RUN	rm -rf /usr/bin /usr/sbin
 # FINAL PREPARATIONS
 #EXPOSE 30333 9933 9944
 #VOLUME ["/data"]
-#CMD ["/usr/local/bin/cennznet"]
+#CMD ["/usr/local/bin"]
 WORKDIR /usr/local/bin
 #ENTRYPOINT [""]
 #CMD [""]
