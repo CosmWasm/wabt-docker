@@ -22,4 +22,25 @@ RUN cd /cbuilder/wabt/build && cmake --build .
 # ===== END FIRST STAGE ======
 
 # ===== START SECOND STAGE ======
+FROM phusion/baseimage:0.11
+LABEL maintainer "support@polkasource.com"
+LABEL description="Small image with the binaries."
+ARG PROFILE=release
+COPY --from=builder /cbuilder/wabt/bin /usr/local/bin
+COPY --from=builder /cbuilder/wabt /usr/local/wabt
+
+# REMOVE & CLEANUP
+RUN mv /usr/share/ca* /tmp && \
+	rm -rf /usr/share/*  && \
+	mv /tmp/ca-certificates /usr/share/ && \
+	rm -rf /usr/lib/python*
+RUN	rm -rf /usr/bin /usr/sbin
+
+# FINAL PREPARATIONS
+#EXPOSE 30333 9933 9944
+#VOLUME ["/data"]
+#CMD ["/usr/local/bin/cennznet"]
+WORKDIR /usr/local/bin
+#ENTRYPOINT [""]
+#CMD [""]
 # ===== END SECOND STAGE ======
