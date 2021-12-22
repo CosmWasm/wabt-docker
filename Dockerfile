@@ -1,5 +1,5 @@
 # ===== START FIRST STAGE ======
-FROM phusion/baseimage:0.11 as builder
+FROM phusion/baseimage:focal-1.1.0 as builder
 LABEL maintainer "support@polkasource.com"
 LABEL description="Large image for building the binaries."
 
@@ -22,7 +22,7 @@ RUN cd /cbuilder/wabt/build && cmake --build .
 # ===== END FIRST STAGE ======
 
 # ===== START SECOND STAGE ======
-FROM phusion/baseimage:0.11
+FROM phusion/baseimage:focal-1.1.0
 LABEL maintainer "support@polkasource.com"
 LABEL description="Small image with the binaries."
 ARG PROFILE=release
